@@ -1,0 +1,37 @@
+# Epoxy_CyNif Pipeline Requirements
+# Python 3.9.x - 3.11.x recommended
+
+# Core scientific computing
+numpy>=1.26.0
+pandas>=2.2.0
+scipy>=1.12.0
+
+# Image processing
+scikit-image>=0.22.0
+tifffile>=2024.1.0
+imagecodecs>=2024.1.0
+
+# Geometry / spatial analysis
+shapely>=2.0.0
+
+# Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Jupyter / interactive
+jupyter>=1.0.0
+ipywidgets>=8.1.0
+ipykernel>=6.0.0
+
+# Configuration
+pyyaml>=6.0.0
+
+# Segmentation (install separately if needed)
+# instanseg  # pip install instanseg or from GitHub
+
+# QC Pipeline (install separately)
+# cylinter  # pip install cylinter or from GitHub
+
+# Optional: visualization
+# napari>=0.4.18
+# napari-instanseg

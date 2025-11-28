@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epoxy_CyNif Pipeline</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-2: #a855f7;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.25), transparent 32%),
+                  radial-gradient(circle at 80% 10%, rgba(168,85,247,0.20), transparent 30%),
+                  radial-gradient(circle at 30% 80%, rgba(56,189,248,0.15), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 32px 18px 48px;
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent));
+      position: relative;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    }
+    .logo::before, .logo::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.75);
+    }
+    .logo::after {
+      inset: 18px;
+      border-color: rgba(255,255,255,0.45);
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.5px;
+    }
+    p.lead { margin: 4px 0 0; color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 18px 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+    }
+    .card h2, .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.12);
+      color: var(--text);
+      font-size: 12px;
+      letter-spacing: 0.2px;
+    }
+    .section {
+      margin-bottom: 18px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo" aria-label="Cyclic IF Symbol"></div>
+      <div>
+        <h1>Epoxy_CyNif Pipeline</h1>
+        <p class="lead">Epoxy-based Cyclic Nanobody Immunofluorescence (Epoxy_CyNif): mehrzyklisches Staining & Imaging mit Stitching, Spillover/AF-Removal, Segmentierung und QC.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="section">
+          <span class="pill">Kurzbeschreibung</span>
+          <p style="margin:10px 0 0; color:var(--muted);">
+            Epoxy_CyNif (Epoxy-based Cyclic Nanobody Immunofluorescence) ermÃ¶glicht sequenzielles Staining/Imaging: Pro Runde werden Nanobody-Marker gebunden, ausgelesen und gebleicht. Nach n Runden entsteht ein hochdimensionaler Stack, der hier rekonstruiert, gereinigt, segmentiert und statistisch ausgewertet wird.
+          </p>
+        </div>
+        <div class="section">
+          <h3>Technik (High-Level)</h3>
+          <ul>
+            <li>Illumination-Korrektur, Stitching, Registrierung, Deconvolution/EDF</li>
+            <li>Spillover-Entfernung (Mutual Information) und Autofluoreszenz-Cleanup</li>
+            <li>DAPI-Optimierung & InstanSeg Nuclei/Cell-Segmentierung</li>
+            <li>CyLinter GUI-QC mit Checkpoints (Tag 1 / Tag 2+)</li>
+            <li>RÃ¤umliche Frequenz- und Gruppen-Statistiken (v18)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Externe Module</h2>
+        <ul>
+          <li>InstanSeg (fluorescence_nuclei_and_cells)</li>
+          <li>CyLinter CLI / GUI</li>
+          <li>scikit-image, tifffile, imageio</li>
+          <li>numpy, pandas, scipy, seaborn, matplotlib</li>
+          <li>shapely (rÃ¤umliche Zuordnung)</li>
+          <li>ipywidgets (Notebook-GUIs)</li>
+        </ul>
+        <p style="margin-top:10px; color:var(--muted);">
+          Env-Pfade/Modelle lokal bereitstellen; Lizenzen gemÃ¤ÃŸ Modulen beachten.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Pipeline-Module</h2>
+        <ul>
+          <li>Part 1: Illumination/Stitching/Registration/Decon&EDF</li>
+          <li>Part 2: Spillover Removal (MI, 0â€“1 Normalisierung)</li>
+          <li>Part 3: AF Removal (ACE)</li>
+          <li>Part 4a/4b: Segmentierung (InstanSeg, Batch-Helper)</li>
+          <li>Part 5: CyLinter QC (Tag 1 & Tag 2+ via GUI)</li>
+          <li>Part 6/7: Spatial Analysis & Stats (v18)</li>
+        </ul>
+        <p style="margin-top:10px; color:var(--muted);">
+          Datenlayout: <code>BASE_EXPORT = C:\Users\researcher\data\Epoxy_CyNif\Epoxy_CyNif\data\export\<span style="color:var(--text)">sample</span></code> + <code>markers_<span style="color:var(--text)">SAMPLE_ID</span>.csv</code>.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
